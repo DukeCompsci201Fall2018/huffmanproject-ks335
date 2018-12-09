@@ -104,10 +104,10 @@ public class HuffProcessor {
 			encodings[root.myValue] = path;
 			return;
 		}
-		else {
+		//else {
 			codingHelper(root.myLeft, path+"0", encodings);
 			codingHelper(root.myRight, path+"1", encodings);
-		}
+		//}
 		//return encodings;
 	}
 	
