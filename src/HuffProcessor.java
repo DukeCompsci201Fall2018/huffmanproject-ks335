@@ -60,7 +60,7 @@ public class HuffProcessor {
 //		}
 	}
 	
-	public int[] readForCounts(BitInputStream in) {
+	private int[] readForCounts(BitInputStream in) {
 		int[] myArr = new int[ALPH_SIZE +1];
 		while(true) {
 		int val = in.readBits(BITS_PER_WORD);
@@ -92,13 +92,13 @@ public class HuffProcessor {
 		return root;
 	}
 	
-	public String[] makeCodingsFromTree(HuffNode root) {
+	private String[] makeCodingsFromTree(HuffNode root) {
 		String[] encodings = new String[ALPH_SIZE + 1];
 		return codingHelper(root, "", encodings);
 		
 	}
 	
-	public String[] codingHelper(HuffNode root, String path, String[] encodings) {
+	private String[] codingHelper(HuffNode root, String path, String[] encodings) {
 		if(root.myLeft == null && root.myRight == null){
 			encodings[root.myValue] = path;
 			return encodings;
@@ -110,7 +110,7 @@ public class HuffProcessor {
 		return encodings;
 	}
 	
-	public void writeHeader(HuffNode root, BitOutputStream out) {
+	private void writeHeader(HuffNode root, BitOutputStream out) {
 		if (root.myLeft != null || root.myRight != null) {
 			out.writeBits(1, 0);
 			writeHeader(root.myLeft, out);
@@ -122,7 +122,7 @@ public class HuffProcessor {
 		}
 	}
 	
-	public void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
+	private void writeCompressedBits(String[] codings, BitInputStream in, BitOutputStream out) {
 		for(int k = 0; k<codings.length; k++) {
 		String code = codings[k];
 		out.writeBits(code.length(), Integer.parseInt(code, 2));
@@ -157,7 +157,7 @@ public class HuffProcessor {
 //		out.close();
 	}
 	
-	public HuffNode readTreeHeader(BitInputStream in) {
+	private HuffNode readTreeHeader(BitInputStream in) {
 		int bit = in.readBits(1); // BITS_PER_INT ?
 		if (bit == -1) throw new HuffException("NO");
 		if (bit == 0) {
@@ -172,7 +172,7 @@ public class HuffProcessor {
 		
 	}
 	
-	public void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
+	private void readCompressedBits(HuffNode root, BitInputStream in, BitOutputStream out) {
 		HuffNode current = root;
 		while (true) {
 			int bits = in.readBits(1);
