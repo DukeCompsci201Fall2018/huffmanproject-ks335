@@ -77,7 +77,7 @@ public class HuffProcessor {
 		
 		for(int index = 0; index < counts.length; index++) {
 			if(counts[index] > 0) {
-			//pq.add(new HuffNode(index, counts[index], null, null));
+			pq.add(new HuffNode(index, counts[index], null, null));
 			}
 			
 		}
@@ -128,8 +128,8 @@ public class HuffProcessor {
 		String code = codings[k];
 		out.writeBits(code.length(), Integer.parseInt(code, 2));
 		}
-		String code = codings[PSEUDO_EOF];
-		out.writeBits(code.length(), Integer.parseInt(code,2));
+		//String code = codings[PSEUDO_EOF];
+		//out.writeBits(code.length(), Integer.parseInt(code,2));
 	}
 	
 	/**
