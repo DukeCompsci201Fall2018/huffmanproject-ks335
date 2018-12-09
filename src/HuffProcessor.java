@@ -64,8 +64,8 @@ public class HuffProcessor {
 		int[] myArr = new int[ALPH_SIZE +1];
 		while(true) {
 			int val = in.readBits(BITS_PER_WORD);
-			myArr[val] = myArr[val] + 1;
 			if (val == -1) break;
+			myArr[val] = myArr[val] + 1;
 		}
 		myArr[PSEUDO_EOF] = 1;
 		return myArr;
@@ -85,7 +85,7 @@ public class HuffProcessor {
 		while(pq.size()>1) {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
-			HuffNode t = new HuffNode(1 , left.myWeight+right.myWeight);
+			HuffNode t = new HuffNode(0 , left.myWeight+right.myWeight);
 			pq.add(t);
 		}
 		HuffNode root = pq.remove();
